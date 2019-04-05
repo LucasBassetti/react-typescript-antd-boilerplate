@@ -19,6 +19,8 @@ React Boilerplate using TypeScript and Ant Design. This boilerplate uses [Create
 - [LESS](http://lesscss.org/) as CSS preprocessing.
 - [Prettier](https://prettier.io/) for code formatter.
 - [React](https://facebook.github.io/react/) as front-end view library.
+- [Redux](https://redux.js.org/) for state container.
+- [Redux-Saga](https://github.com/redux-saga/redux-saga) to fetching asynchronous data with redux.
 - [StyleLint](https://stylelint.io/) for LESS linting.
 - [TSlint](https://palantir.github.io/tslint/) for TypeScript linting using Airbnb's JS style guide.
 - [TypeScript](https://www.typescriptlang.org/) as main language.
