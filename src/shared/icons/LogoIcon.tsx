@@ -1,11 +1,11 @@
 import React from 'react';
 
-type LogoType = {
+interface Props {
   fill?: string;
   size?: number;
 };
 
-const LogoIcon = ({ fill = '#61DAFB', size = 32 }: LogoType) => (
+const LogoIcon = ({ fill = '#61DAFB', size = 32 }: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     height={size}

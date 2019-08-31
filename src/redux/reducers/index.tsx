@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
 import list from './list';
 
-export default combineReducers({
-  list,
-  routing: routerReducer
-});
+export default (history: History) =>
+  combineReducers({
+    list,
+    router: connectRouter(history)
+  });

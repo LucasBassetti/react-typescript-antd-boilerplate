@@ -1,6 +1,15 @@
+const path = require('path');
 const { override, fixBabelImports, addLessLoader } = require('customize-cra');
 
+// Add just the necessary icons to decrease bundle size
+function overrides(config, env) {
+  config.resolve.alias['@ant-design/icons/lib/dist$'] = path.join(__dirname, 'src/icons.js')
+
+  return config
+}
+
 module.exports = override(
+  overrides,
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',

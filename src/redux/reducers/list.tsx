@@ -1,11 +1,11 @@
 import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from '../actions';
 
-type State = {
+interface State {
   data: string[];
   fetching: boolean;
 };
 
-type Props = {
+interface Props {
   type: string;
   payload: any;
 };

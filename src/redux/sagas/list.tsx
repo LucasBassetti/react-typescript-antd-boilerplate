@@ -4,7 +4,7 @@ import * as API from '../api';
 
 export default [takeLatest(FETCH_LIST_REQUEST, fetchList)];
 
-type ListAction = {
+interface IFetchList {
   type: string;
   payload: {
     resolve: Function;
@@ -12,7 +12,7 @@ type ListAction = {
   };
 };
 
-function* fetchList({ payload: { resolve, reject } }: ListAction) {
+function* fetchList({ payload: { resolve, reject } }: IFetchList) {
   try {
     const list: string[] = yield call(API.fetchList);
 

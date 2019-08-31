@@ -2,18 +2,19 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
-import { GITHUB_LINK } from '../../constants';
 import { fetchList } from '../../redux/actions';
-import { LogoIcon } from '../../shared';
-import { Header } from '../../layout';
+import { GITHUB_LINK } from '../../constants/general';
+import LogoIcon from '../../shared/icons/LogoIcon';
+import ListItem from '../../shared/components/data_entry/list_item/ListItem';
+import Header from '../../layout/header/Header';
 
 import './Home.less';
 
-type Props = {
+interface Props {
   fetching: boolean;
   list: string[];
   fetchList: Function;
-};
+}
 
 const Home = ({ fetching, list, fetchList }: Props) => {
   const { t } = useTranslation('homeScreen');
@@ -39,15 +40,7 @@ const Home = ({ fetching, list, fetchList }: Props) => {
             </a>
           }
         >
-          {fetching ? (
-            <p>{t('loading')}</p>
-          ) : (
-            list.map(item => (
-              <p key={item} className="home__item">
-                {item}
-              </p>
-            ))
-          )}
+          {fetching ? <p>{t('loading')}</p> : list.map(item => <ListItem key={item} item={item} />)}
         </Card>
       </div>
     </>
