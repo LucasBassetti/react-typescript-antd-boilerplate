@@ -9,7 +9,7 @@
     "stylelint-check": "stylelint-config-prettier-check",
     "start-js": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "start-build": "http-server ./build",
+    "start-build": "http-server ./build -p 9090 -d false",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },

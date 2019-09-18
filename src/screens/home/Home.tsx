@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import { fetchList } from '../../redux/actions';
 import { GITHUB_LINK } from '../../constants/general';
 import LogoIcon from '../../shared/icons/LogoIcon';
@@ -14,9 +14,10 @@ interface Props {
   fetching: boolean;
   list: string[];
   fetchList: Function;
+  history: any;
 }
 
-const Home = ({ fetching, list, fetchList }: Props) => {
+const Home = ({ fetching, list, fetchList, history }: Props) => {
   const { t } = useTranslation('homeScreen');
 
   useEffect(() => {
@@ -27,6 +28,9 @@ const Home = ({ fetching, list, fetchList }: Props) => {
     fetchData();
   }, []);
 
+  const onLogout = () => {
+    history.push('/');
+  };
   return (
     <>
       <Header />
@@ -41,6 +45,10 @@ const Home = ({ fetching, list, fetchList }: Props) => {
           }
         >
           {fetching ? <p>{t('loading')}</p> : list.map(item => <ListItem key={item} item={item} />)}
+          <Button type="danger">button</Button>
+          <Button type="primary" onClick={onLogout}>
+            Logout
+          </Button>
         </Card>
       </div>
     </>
