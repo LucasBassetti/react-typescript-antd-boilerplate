@@ -1,10 +1,15 @@
-export const FETCH_LIST_REQUEST: 'FETCH_LIST_REQUEST' = 'FETCH_LIST_REQUEST';
-export const FETCH_LIST_SUCCESS: 'FETCH_LIST_SUCCESS' = 'FETCH_LIST_SUCCESS';
-export const FETCH_LIST_FAILURE: 'FETCH_LIST_FAILURE' = 'FETCH_LIST_FAILURE';
+import { Dispatch } from 'redux';
 
-export const fetchList = (): Function => (dispatch: Function): Promise<void> =>
+export const FETCH_LIST_REQUEST: 'fetch_list_request' = 'fetch_list_request';
+export const FETCH_LIST_SUCCESS: 'fetch_list_success' = 'fetch_list_success';
+export const FETCH_LIST_FAILURE: 'fetch_list_failure' = 'fetch_list_failure';
+
+export type DispatchFetchList = () => (dispatch: Dispatch) => Promise<void>;
+export type FetchList = () => Promise<void>;
+
+export const fetchList: DispatchFetchList = () => async dispatch =>
   new Promise(
-    (resolve: Function, reject: Function): void => {
+    (resolve, reject): void => {
       dispatch({
         type: FETCH_LIST_REQUEST,
         payload: { resolve, reject }

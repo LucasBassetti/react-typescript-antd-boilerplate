@@ -1,31 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
-import { fetchList } from '../../redux/actions';
-import { GITHUB_LINK } from '../../constants/general';
-import LogoIcon from '../../shared/icons/LogoIcon';
-import ListItem from '../../shared/components/data_entry/list_item/ListItem';
-import Header from '../../layout/header/Header';
+import { fetchList, FetchList } from '@redux/actions';
+import { GITHUB_LINK } from '@constants/general';
+import LogoIcon from '@icons/LogoIcon';
+import ListItem from '@components/data_entry/ListItem';
+import Header from '@layout/Header';
 
 import './Home.less';
 
-interface Props {
-  fetching: boolean;
-  list: string[];
-  fetchList: Function;
+interface StateProps {
+  list: IItem[];
 }
 
-const Home = ({ fetching, list, fetchList }: Props) => {
+interface DispatchProps {
+  fetchList: FetchList;
+}
+
+type IProps = StateProps & DispatchProps;
+
+const Home: React.FC<IProps> = ({ list, fetchList }) => {
+  const [fetching, setFetching] = useState(true);
   const { t } = useTranslation('homeScreen');
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchList();
-    };
+    (async () => {
+      await setFetching(true);
 
-    fetchData();
-  }, []);
+      try {
+        await fetchList();
+      } catch (error) {
+        // console.log(error)
+      }
+
+      setFetching(false);
+    })();
+  }, [fetchList]);
 
   return (
     <>
@@ -35,26 +46,29 @@ const Home = ({ fetching, list, fetchList }: Props) => {
           className="home__card"
           title={t('title')}
           extra={
-            <a className="home__link" href={GITHUB_LINK} target="_blank">
+            <a className="home__link" href={GITHUB_LINK} target="_blank" rel="noopener noreferrer">
               <LogoIcon fill="#3f51b5" /> {t('githubLink')}
             </a>
           }
         >
-          {fetching ? <p>{t('loading')}</p> : list.map(item => <ListItem key={item} item={item} />)}
+          {fetching ? (
+            <p>{t('loading')}</p>
+          ) : (
+            list.map((item: IItem) => <ListItem key={item.id} item={item.name} />)
+          )}
         </Card>
       </div>
     </>
   );
 };
 
-function mapStateToProps({ list }: any) {
-  return {
-    list: list.data,
-    fetching: list.fetching
-  };
-}
+const mapStateToProps = ({ list }: IReducerStates): StateProps => ({
+  list
+});
+
+const MapDispatchToProps = { fetchList };
 
 export default connect(
   mapStateToProps,
-  { fetchList }
+  MapDispatchToProps
 )(Home);

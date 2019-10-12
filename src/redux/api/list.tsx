@@ -1,7 +1,9 @@
-export const fetchList = async (): Promise<string[]> => {
-  const list: string[] = await new Promise(resolve => {
+type APIFetchList = () => Promise<IItem[]>;
+
+export const fetchList: APIFetchList = async () => {
+  const list: IItem[] = await new Promise(resolve => {
     setTimeout(() => {
-      resolve(['item1', 'item2', 'item3']);
+      resolve([{ id: 1, name: 'item1' }, { id: 2, name: 'item2' }, { id: 3, name: 'item3' }]);
     }, 1000);
   });
 

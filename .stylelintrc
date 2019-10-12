@@ -1,7 +1,12 @@
 {
   "extends": ["stylelint-config-standard", "stylelint-prettier/recommended", "stylelint-config-prettier"],
-  "plugins": ["stylelint-prettier"],
+  "plugins": ["stylelint-prettier", "stylelint-order"],
   "rules": {
-    "prettier/prettier": [true, {"singleQuote": true, "tabWidth": 2}]
+    "prettier/prettier": [true, {"singleQuote": true, "tabWidth": 2}],
+    "order/order": [
+			"custom-properties",
+			"declarations"
+		],
+		"order/properties-alphabetical-order": true
   }
 }

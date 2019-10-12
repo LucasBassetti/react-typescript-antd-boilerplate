@@ -7,14 +7,14 @@ export default [takeLatest(FETCH_LIST_REQUEST, fetchList)];
 interface IFetchList {
   type: string;
   payload: {
-    resolve: Function;
-    reject: Function;
+    resolve: (list: IItem[]) => void;
+    reject: (error: string) => void;
   };
-};
+}
 
 function* fetchList({ payload: { resolve, reject } }: IFetchList) {
   try {
-    const list: string[] = yield call(API.fetchList);
+    const list: IItem[] = yield call(API.fetchList);
 
     resolve(list);
 
