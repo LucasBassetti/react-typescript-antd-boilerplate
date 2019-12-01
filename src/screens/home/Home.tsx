@@ -6,7 +6,7 @@ import { fetchList, FetchList } from '@redux/actions';
 import { GITHUB_LINK } from '@constants/general';
 import LogoIcon from '@icons/LogoIcon';
 import ListItem from '@components/data_entry/ListItem';
-import Header from '@layout/Header';
+import Header from '@layout/header';
 
 import './Home.less';
 
