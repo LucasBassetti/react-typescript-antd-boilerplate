@@ -10,17 +10,17 @@ import Header from '@layout/header';
 
 import './Home.less';
 
-interface StateProps {
+type StateProps = {
   list: IItem[];
 }
 
-interface DispatchProps {
+type DispatchProps = {
   fetchList: FetchList;
 }
 
-type IProps = StateProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 
-const Home: React.FC<IProps> = ({ list, fetchList }) => {
+const Home: React.FC<Props> = ({ list, fetchList }) => {
   const [fetching, setFetching] = useState(true);
   const { t } = useTranslation('homeScreen');
 
