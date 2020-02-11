@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card } from 'antd';
-import { fetchList, FetchList } from '@redux/actions';
+import { fetchList } from '@redux/actions';
 import { GITHUB_LINK } from '@constants/general';
 import LogoIcon from '@icons/LogoIcon';
 import ListItem from '@components/data_entry/ListItem';
@@ -10,33 +10,27 @@ import Header from '@layout/header';
 
 import './Home.less';
 
-type StateProps = {
-  list: IItem[];
-}
+type Props = {};
 
-type DispatchProps = {
-  fetchList: FetchList;
-}
-
-type Props = StateProps & DispatchProps;
-
-const Home: React.FC<Props> = ({ list, fetchList }) => {
-  const [fetching, setFetching] = useState(true);
+const Home: React.FC<Props> = () => {
   const { t } = useTranslation('homeScreen');
+  const [fetching, setFetching] = useState(true);
+  const list = useSelector((state: IReducerStates) => state.list);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       await setFetching(true);
 
       try {
-        await fetchList();
+        await dispatch(fetchList());
       } catch (error) {
         // console.log(error)
       }
 
       setFetching(false);
     })();
-  }, [fetchList]);
+  }, [dispatch]);
 
   return (
     <>
@@ -62,13 +56,4 @@ const Home: React.FC<Props> = ({ list, fetchList }) => {
   );
 };
 
-const mapStateToProps = ({ list }: IReducerStates): StateProps => ({
-  list
-});
-
-const MapDispatchToProps = { fetchList };
-
-export default connect(
-  mapStateToProps,
-  MapDispatchToProps
-)(Home);
+export default Home;

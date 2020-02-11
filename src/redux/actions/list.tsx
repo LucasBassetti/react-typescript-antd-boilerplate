@@ -5,7 +5,6 @@ export const FETCH_LIST_SUCCESS: 'fetch_list_success' = 'fetch_list_success';
 export const FETCH_LIST_FAILURE: 'fetch_list_failure' = 'fetch_list_failure';
 
 export type DispatchFetchList = () => (dispatch: Dispatch) => Promise<void>;
-export type FetchList = () => Promise<void>;
 
 export const fetchList: DispatchFetchList = () => async dispatch =>
   new Promise(

@@ -4,15 +4,15 @@ import * as API from '../api';
 
 export default [takeLatest(FETCH_LIST_REQUEST, fetchList)];
 
-interface IFetchList {
+type FetchList = {
   type: string;
   payload: {
     resolve: (list: IItem[]) => void;
     reject: (error: string) => void;
   };
-}
+};
 
-function* fetchList({ payload: { resolve, reject } }: IFetchList) {
+function* fetchList({ payload: { resolve, reject } }: FetchList) {
   try {
     const list: IItem[] = yield call(API.fetchList);
 
